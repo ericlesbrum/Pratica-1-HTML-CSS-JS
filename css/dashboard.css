@@ -1,7 +1,30 @@
 body {
   font-family: "Lato", sans-serif;
 }
-
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+#timer{
+    opacity: 1;
+    text-align: center;
+    position:absolute;
+    width: 50%;
+    bottom: 0%;
+}
+.center p {
+    color: ghostwhite;
+    opacity: 0.65;
+    padding: 5px 5px 5px 5px;
+    text-decoration: none;
+    font-size: 12px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -30,21 +53,23 @@ tr:nth-child(even) {
   padding-top: 20px;
 }
 
-.sidenav a {
-  padding: 8px 6px 6px 6px;
-  text-decoration: none;
-  font-size: 15px;
-  color: #818181;
-  display: block;
+.sidenav button {
+    padding: 8px 6px 6px 6px;
+    text-decoration: none;
+    font-size: 15px;
+    border: 0;
+    color: #818181;
+    display: block;
+    background-color: transparent;
 }
 
-.sidenav a:hover {
+.sidenav button:hover {
   color: #f1f1f1;
 }
 
 .main {
-  margin-left: 195px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
+  margin-left: 195px;
+  font-size: 28px;
   padding: 0px 10px;
 }
 
