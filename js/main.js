@@ -27,7 +27,7 @@ function checkCredential(){
 function redirect(pos) {
     switch(pos){
         case 0:
-            document.querySelector(".main").innerHTML='<object type="text/html" data="storage.html" ></object>';
+            document.querySelector(".main").innerHTML='<object type="text/html" data="storage.html" style="width:100%" height="100%"></object>';
             break;
         case 1:
             break;
