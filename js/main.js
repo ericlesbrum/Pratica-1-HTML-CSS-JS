@@ -1,6 +1,7 @@
 setAlertNone();
 setInterval(setLocalTime);
 var row=null;
+var DataJson=[];
 $(function(){
     $("#checkIDPass").click(function(){
         if(checkCredential()){
@@ -43,6 +44,33 @@ function saveData(){
         }
     }
     resetForm();
+    Store();
+}
+function Store()
+{
+    var DataJson=[];
+    let tableRows=document.querySelector("#datatable").rows;
+    for(let i=1;i<tableRows.length;i++){
+        let prodStore={
+        cod:tableRows[i].cells[0].innerHTML, 
+        priceCost:tableRows[i].cells[1].innerHTML, 
+        priceSell:tableRows[i].cells[2].innerHTML, 
+        countNow:tableRows[i].cells[3].innerHTML,
+        countSell:tableRows[i].cells[4].innerHTML
+        };
+        DataJson.push(prodStore);
+    }
+    SaveasJson(DataJson);
+}
+function SaveasJson(DataJson){
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(DataJson, null, 2)], {
+        type: "text/plain"
+      }));
+    a.setAttribute("download", "data.json");
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a); 
 }
 function editData(td){
     row=td.parentElement.parentElement;
@@ -58,6 +86,7 @@ function deleteData(td){
 }
 function resetForm(){
     let getinputdataArray=document.querySelectorAll("input");
+    
     getinputdataArray.forEach(function(item) {
         item.value="";
     });
@@ -91,10 +120,6 @@ function redirect(pos) {
         case 2:
             break;
         case 3:
-            break;
-        case 4:
-            break;
-        default:
             break;
     }
 }
