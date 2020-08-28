@@ -10,19 +10,38 @@ $(function(){
         }
     });
 });
+function saveData(){
+	let getinputdataArray=document.querySelectorAll("input");
+    let localtdArray=[];
+    let localtr=document.createElement("tr");
+    getinputdataArray.forEach(function(item) {
+        if(item.value.length==0)
+            return;
+        localtdArray.push(item.value);
+    });
+    localtdArray.forEach(function(item) {
+        let localtd=document.createElement("td");
+        localtd.innerHTML=item;
+        localtr.appendChild(localtd);
+    });
+    document.querySelector("#datatable").appendChild(localtr);
+}
 function setAlertNone(){
     if(document.querySelector("#alert")!=null)
         document.querySelector("#alert").style.display="none";
 }
 function checkCredential(){
-    let id=document.querySelector("#idUser").value;
-    let psword=document.querySelector("#inputPassword").value;
-    if(id != '' && psword != ''){
-        return true;
-    }
-    else{
-        return false;
-    }
+	if(document.querySelector("#idUser") !=null && document.querySelector("#inputPassword")!=null)
+	{
+		let id=document.querySelector("#idUser").value;
+	    let psword=document.querySelector("#inputPassword").value;
+	    if(id != '' && psword != ''){
+	        return true;
+	    }
+	    else{
+	        return false;
+	    }
+	}
 }
 function redirect(pos) {
     switch(pos){
