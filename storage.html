@@ -9,31 +9,35 @@
         <h1 style="text-align: center">Adicionar ao estoque</h1>
         <div>
             <table style="width:100%">
-                <tr>
-                    <td>Codigo produto</td>
-                    <td>Preço de custo</td>
-                    <td>Preço de venda</td>
-                    <td>Quantidade em estoque</td>
-                    <td>Quantidade vendida</td>
-                </tr>
-                <tr>
-                    <td><input type="number" min="1" max="999" id="cod"></td>
-                    <td><input type="number" step="0.1" id="pricecost" ></td>
-                    <td><input type="number" step="0.1" id="pricesell" ></td>
-                    <td><input type="number" min="1" max="999" id="qntEst" ></td>
-                    <td><input type="number" min="1" max="999" id="qntSell" ></td>
-                    <td><button class="btn btn-lg btn-primary btn-block" type="submit" id="sub" onclick="saveData()">Adicionar</button></td>
-                </tr>
+                <form onsubmit="event.preventDefault();saveData();">
+                    <tr>
+                        <th>Codigo produto</th>
+                        <th>Preço de custo</th>
+                        <th>Preço de venda</th>
+                        <th>Quantidade em estoque</th>
+                        <th>Quantidade vendida</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td><input type="number" min="1" max="999" id="cod"></td>
+                        <td><input type="number" step="0.1" id="pricecost" ></td>
+                        <td><input type="number" step="0.1" id="pricesell" ></td>
+                        <td><input type="number" min="1" max="999" id="qntEst" ></td>
+                        <td><input type="number" min="1" max="999" id="qntSell" ></td>
+                        <td><button class="btn btn-lg btn-primary btn-block" type="submit">Adicionar</button></td>
+                    </tr>
+                </form>
             </table>
             <br>
             <h2 style="text-align: center">Estoque atual</h2>
             <table style="width:100%" id="datatable">
                 <tr>
-                    <td>Codigo produto</td>
-                    <td>Preço de custo</td>
-                    <td>Preço de venda</td>
-                    <td>Quantidade em estoque</td>
-                    <td>Quantidade vendida</td>
+                    <th>Codigo produto</th>
+                    <th>Preço de custo</th>
+                    <th>Preço de venda</th>
+                    <th>Quantidade em estoque</th>
+                    <th>Quantidade vendida</th>
+                    <th></th>
                 </tr>
             </table>
         </div>

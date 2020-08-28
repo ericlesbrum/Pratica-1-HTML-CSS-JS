@@ -1,5 +1,6 @@
 setAlertNone();
 setInterval(setLocalTime);
+var row=null;
 $(function(){
     $("#checkIDPass").click(function(){
         if(checkCredential()){
@@ -11,20 +12,57 @@ $(function(){
     });
 });
 function saveData(){
-	let getinputdataArray=document.querySelectorAll("input");
-    let localtdArray=[];
-    let localtr=document.createElement("tr");
-    getinputdataArray.forEach(function(item) {
-        if(item.value.length==0)
-            return;
-        localtdArray.push(item.value);
-    });
-    localtdArray.forEach(function(item) {
-        let localtd=document.createElement("td");
-        localtd.innerHTML=item;
+    if(row ==null){
+        let getinputdataArray=document.querySelectorAll("input");
+        let localtdArray=[];
+        let localtr=document.createElement("tr");
+        let localtd=null;
+
+        getinputdataArray.forEach(function(item) {
+            if(item.value.length==0)
+                return;
+            localtdArray.push(item.value);
+        });
+
+        localtdArray.forEach(function(item) {
+            localtd=document.createElement("td");
+            localtd.innerHTML=item;
+            localtr.appendChild(localtd);
+        });
+        
+        localtd=document.createElement("td");
+        localtd.innerHTML=`<a onclick="editData(this)">Editar</a>
+                            <a onclick="deleteData(this)">Delete</a>`;
         localtr.appendChild(localtd);
+        document.querySelector("#datatable").appendChild(localtr);
+    }
+    else{
+        let getinputdataArray=document.querySelectorAll("input");
+        for(let i=0;i<getinputdataArray.length;i++){
+            row.cells[i].innerHTML=getinputdataArray[i].value;
+        }
+    }
+    resetForm();
+}
+function editData(td){
+    row=td.parentElement.parentElement;
+    let getinputdataArray=document.querySelectorAll("input");
+    for(let i=0;i<getinputdataArray.length;i++){
+        getinputdataArray[i].value=row.cells[i].innerHTML;
+    }
+}
+function deleteData(td){
+    row=td.parentElement.parentElement;
+    document.querySelector("#datatable").deleteRow(row.rowIndex);
+    resetForm();
+}
+function resetForm(){
+    let getinputdataArray=document.querySelectorAll("input");
+    getinputdataArray.forEach(function(item) {
+        item.value="";
     });
-    document.querySelector("#datatable").appendChild(localtr);
+    
+    row=null;
 }
 function setAlertNone(){
     if(document.querySelector("#alert")!=null)
