@@ -2,6 +2,7 @@ setAlertNone();
 setInterval(setLocalTime);
 var row=null;
 var DataJson=[];
+var money=null;
 $(function(){
     $("#checkIDPass").click(function(){
         if(checkCredential()){
@@ -13,27 +14,50 @@ $(function(){
     });
 });
 
+function submitSell()
+{
+    if(document.querySelector("#idTForm").rows.length!=0){
+        let tableRows=document.querySelector("#idTForm").rows;
+        for(let i=1;i<tableRows.length;i++){
+            let cod = tableRows[i].cells[0].innerHTML;
+            let prod = getvalUsingFind(cod);
+            if((prod.countNow-tableRows[i].cells[2].innerHTML)<=0){
+                prod.countNow=0;
+                prod.countSell+=tableRows[i].cells[2].innerHTML;
+            }
+            else{
+                prod.countNow-=tableRows[i].cells[2].innerHTML;
+                prod.countSell+=tableRows[i].cells[2].innerHTML;
+            }
+        }
+        localStorage.removeItem("DataJson");
+        localStorage.setItem("DataJson", JSON.stringify(DataJson));
+    } 
+}
+
 function addToSellTable(){
     let selectCod=document.querySelector("#cod");
     let qntMax=document.querySelector("#qntSell");
-    let sellTable=document.querySelector("#idTForm");
-    let prod=getvalUsingFind(selectCod.options[selectCod.selectedIndex].value);
-        
-    let tdCod=document.createElement("td");
-    let tdLucro=document.createElement("td");
-    let tdVend=document.createElement("td");
-    
-    let tr=document.createElement("tr");
-    
-    tdCod.innerHTML=prod.cod;
-    tdLucro.innerHTML=prod.priceSell-prod.priceCost;
-    tdVend.innerHTML=qntMax.value;
-    
-    tr.appendChild(tdCod);
-    tr.appendChild(tdLucro);
-    tr.appendChild(tdVend);
-    
-    sellTable.appendChild(tr);
+    if(qntMax.value!=0){
+        let sellTable=document.querySelector("#idTForm");
+        let prod=getvalUsingFind(selectCod.options[selectCod.selectedIndex].value);
+
+        let tdCod=document.createElement("td");
+        let tdLucro=document.createElement("td");
+        let tdVend=document.createElement("td");
+
+        let tr=document.createElement("tr");
+
+        tdCod.innerHTML=prod.cod;
+        tdLucro.innerHTML=prod.priceSell-prod.priceCost;
+        tdVend.innerHTML=qntMax.value;
+
+        tr.appendChild(tdCod);
+        tr.appendChild(tdLucro);
+        tr.appendChild(tdVend);
+
+        sellTable.appendChild(tr);
+    }  
 }
 
 function presetSell()
@@ -63,18 +87,21 @@ function getvalUsingFind(id) {
 
 function saveData(){
     if(row ==null){
+        let flag=false;
         let getinputdataArray=document.querySelectorAll("input");
         let localtdArray=[];
         let localtr=document.createElement("tr");
         let localtd=null;
 
         getinputdataArray.forEach(function(item) {
-            if(item.value.length==0)
+            if(item.value.length==0){
+                flag=true;
                 return;
+            }
             localtdArray.push(item.value);
         });
-
-        localtdArray.forEach(function(item) {
+        if(flag==false){
+            localtdArray.forEach(function(item) {
             localtd=document.createElement("td");
             localtd.innerHTML=item;
             localtr.appendChild(localtd);
@@ -85,6 +112,7 @@ function saveData(){
                             <a onclick="deleteData(this)">Delete</a>`;
         localtr.appendChild(localtd);
         document.querySelector("#datatable").appendChild(localtr);
+        }   
     }
     else{
         let getinputdataArray=document.querySelectorAll("input");
@@ -99,7 +127,7 @@ function saveData(){
 function Store()
 {
     var DataJson=[];
-    if(tableRows=document.querySelector("#datatable").rows.length!=0){
+    if(document.querySelector("#datatable").rows.length!=0){
         let tableRows=document.querySelector("#datatable").rows;
         for(let i=1;i<tableRows.length;i++){
             let prodStore={
