@@ -12,6 +12,55 @@ $(function(){
         }
     });
 });
+
+function addToSellTable(){
+    let selectCod=document.querySelector("#cod");
+    let qntMax=document.querySelector("#qntSell");
+    let sellTable=document.querySelector("#idTForm");
+    let prod=getvalUsingFind(selectCod.options[selectCod.selectedIndex].value);
+        
+    let tdCod=document.createElement("td");
+    let tdLucro=document.createElement("td");
+    let tdVend=document.createElement("td");
+    
+    let tr=document.createElement("tr");
+    
+    tdCod.innerHTML=prod.cod;
+    tdLucro.innerHTML=prod.priceSell-prod.priceCost;
+    tdVend.innerHTML=qntMax.value;
+    
+    tr.appendChild(tdCod);
+    tr.appendChild(tdLucro);
+    tr.appendChild(tdVend);
+    
+    sellTable.appendChild(tr);
+}
+
+function presetSell()
+{
+    let selectCod=document.querySelector("#cod");
+    DataJson=JSON.parse(localStorage.getItem("DataJson"));
+    for(let i=0;i<DataJson.length;i++){
+        let item=document.createElement("option");
+        item.innerHTML=DataJson[i].cod;
+        selectCod.appendChild(item);
+    }
+    changeSelect();
+}
+
+function changeSelect(){
+    let selectCod=document.querySelector("#cod");
+    let qntMax=document.querySelector("#qntSell");
+    let prod=getvalUsingFind(selectCod.options[selectCod.selectedIndex].value);
+    qntMax.setAttribute("max",prod.countNow);
+}
+
+function getvalUsingFind(id) {
+
+  let obj = DataJson.find(item => item.cod === id);
+  return obj;
+}
+
 function saveData(){
     if(row ==null){
         let getinputdataArray=document.querySelectorAll("input");
@@ -43,25 +92,29 @@ function saveData(){
             row.cells[i].innerHTML=getinputdataArray[i].value;
         }
     }
-    resetForm();
     Store();
+    resetForm();
 }
+
 function Store()
 {
     var DataJson=[];
-    let tableRows=document.querySelector("#datatable").rows;
-    for(let i=1;i<tableRows.length;i++){
-        let prodStore={
-        cod:tableRows[i].cells[0].innerHTML, 
-        priceCost:tableRows[i].cells[1].innerHTML, 
-        priceSell:tableRows[i].cells[2].innerHTML, 
-        countNow:tableRows[i].cells[3].innerHTML,
-        countSell:tableRows[i].cells[4].innerHTML
-        };
-        DataJson.push(prodStore);
-    }
-    SaveasJson(DataJson);
+    if(tableRows=document.querySelector("#datatable").rows.length!=0){
+        let tableRows=document.querySelector("#datatable").rows;
+        for(let i=1;i<tableRows.length;i++){
+            let prodStore={
+            cod:tableRows[i].cells[0].innerHTML, 
+            priceCost:tableRows[i].cells[1].innerHTML, 
+            priceSell:tableRows[i].cells[2].innerHTML, 
+            countNow:tableRows[i].cells[3].innerHTML,
+            countSell:tableRows[i].cells[4].innerHTML
+            };
+            DataJson.push(prodStore);
+        }
+        localStorage.setItem("DataJson", JSON.stringify(DataJson));
+    } 
 }
+
 function SaveasJson(DataJson){
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([JSON.stringify(DataJson, null, 2)], {
@@ -72,6 +125,7 @@ function SaveasJson(DataJson){
     a.click();
     document.body.removeChild(a); 
 }
+
 function editData(td){
     row=td.parentElement.parentElement;
     let getinputdataArray=document.querySelectorAll("input");
@@ -79,11 +133,13 @@ function editData(td){
         getinputdataArray[i].value=row.cells[i].innerHTML;
     }
 }
+
 function deleteData(td){
     row=td.parentElement.parentElement;
     document.querySelector("#datatable").deleteRow(row.rowIndex);
     resetForm();
 }
+
 function resetForm(){
     let getinputdataArray=document.querySelectorAll("input");
     
@@ -97,6 +153,7 @@ function setAlertNone(){
     if(document.querySelector("#alert")!=null)
         document.querySelector("#alert").style.display="none";
 }
+
 function checkCredential(){
 	if(document.querySelector("#idUser") !=null && document.querySelector("#inputPassword")!=null)
 	{
@@ -110,19 +167,23 @@ function checkCredential(){
 	    }
 	}
 }
+
 function redirect(pos) {
     switch(pos){
         case 0:
             document.querySelector(".main").innerHTML='<object type="text/html" data="storage.html" style="width:100%" height="100%"></object>';
             break;
         case 1:
+            document.querySelector(".main").innerHTML='<object type="text/html" data="sell.html" style="width:100%" height="100%"></object>';
             break;
         case 2:
+            document.querySelector(".main").innerHTML='<object type="text/html" data="doc.html" style="width:100%" height="100%"></object>';
             break;
         case 3:
             break;
     }
 }
+
 function setLocalTime() {
     if(document.getElementById("timer")!=null){
         var d = new Date();

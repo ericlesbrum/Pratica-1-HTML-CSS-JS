@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="./css/dashboard.css" rel="stylesheet">
+        <title>Empresa ZYX</title>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body onload="presetSell()">
+        <div> 
+            <h1>Selecione o produto a ser vendido</h1>
+        </div>
+        <form onsubmit="event.preventDefault();">
+            <table id="sellingTable" style="width:100%">
+                <tr>
+                    <th>Codigo produto</th>
+                    <th>Quantidade a ser vendida</th>
+                </tr>
+                <tr>
+                    <td><select name="codigo" id="cod" onchange="changeSelect()"></select></td>
+                    <td><input type="number" min="1" id="qntSell"></td>
+                    <td><button class="btn btn-lg btn-primary btn-block" style="align-content:center" onclick="addToSellTable()" >Adicionar</button></td>
+                </tr>
+            </table>
+            <div> 
+                <h1>Resumo dos produtos vendidos</h1>
+            </div>
+            <table id="idTForm" style="width:100%">
+                <tr>
+                    <th>Codigo produto</th>
+                    <th>Lucro</th>
+                    <th>Quantidade a ser vendida</th>
+                </tr>
+            </table>
+            <button class="btn btn-lg btn-primary btn-block" style="align-content:center" type="submit">Confirmar</button>
+        </form>
+        <footer> 
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <script src="./js/main.js"></script>
+        </footer> 
+    </body>
+</html>
