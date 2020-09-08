@@ -5,7 +5,7 @@
         <title>Empresa ZYX</title>
         <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
     </head>
-    <body onload="presetSell()">
+    <body onload="presetSell();">
         <div> 
             <h1>Selecione o produto a ser vendido</h1>
         </div>
@@ -31,7 +31,7 @@
                 </tr>
             </table>
             <button class="btn btn-lg btn-primary btn-block" style="align-content:center" data-toggle="modal" data-target="#myModal">Confirmar</button>
-        <form onsubmit="event.preventDefault();submitSell();">
+        <form onsubmit="submitSell();">
             <div class="modal fade" id="myModal">
                 <div class="modal-dialog">
                 <div class="modal-content">
@@ -50,7 +50,7 @@
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
-                        <button class="btn btn-primary"  type="submit" onClick="window.location.reload()">Confirmar</button>
+                        <button class="btn btn-primary"  type="submit">Confirmar</button>
                     </div>
                 </div>
             </div>

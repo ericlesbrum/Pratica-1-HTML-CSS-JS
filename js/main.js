@@ -14,6 +14,46 @@ $(function(){
     });
 });
 
+function setTd(){
+    let td=[];
+    for(let i=0;i<5;i++){
+        td.push(document.createElement("td"));
+    }
+    return td;
+}
+function setToDoc(type){
+    DataJson=JSON.parse(localStorage.getItem("DataJson"));
+    if(DataJson!=null){
+        let table=document.querySelector("#datatable");
+        DataJson.forEach(function(item){
+            let aux=document.createElement("tr");
+            let text="";
+            if(type==0){
+                text="<td>"+item.cod+"</td>"+
+                        "<td>"+item.priceCost+"</td>"+
+                        "<td>"+item.priceSell+"</td>"+
+                        "<td>"+item.countNow+"</td>"+
+                        "<td>"+item.countSell+"</td>";
+                
+                text+=`<td><a onclick="editData(this)">Editar</a>
+                            <a onclick="deleteData(this)">Delete</a></td>`;
+                
+                aux.innerHTML=(text);
+                table.appendChild(aux);
+            }
+            else{
+                text="<td>"+item.cod+"</td>"+
+                        "<td>"+item.priceCost+"</td>"+
+                        "<td>"+item.priceSell+"</td>"+
+                        "<td>"+item.countNow+"</td>"+
+                        "<td>"+item.countSell+"</td>";
+                aux.innerHTML=(text);
+                table.appendChild(aux);
+            }
+        })
+    }
+} 
+
 function submitSell()
 {
     if(document.querySelector("#idTForm").rows.length!=0){
@@ -30,8 +70,11 @@ function submitSell()
                 prod.countSell+=tableRows[i].cells[2].innerHTML;
             }
         }
+    DataJson=JSON.parse(localStorage.getItem("DataJson"));
+    if(DataJson!=null){
         localStorage.removeItem("DataJson");
         localStorage.setItem("DataJson", JSON.stringify(DataJson));
+        }
     } 
 }
 
@@ -64,12 +107,17 @@ function presetSell()
 {
     let selectCod=document.querySelector("#cod");
     DataJson=JSON.parse(localStorage.getItem("DataJson"));
-    for(let i=0;i<DataJson.length;i++){
-        let item=document.createElement("option");
-        item.innerHTML=DataJson[i].cod;
-        selectCod.appendChild(item);
+    if(DataJson!=null){
+           for(let i=0;i<DataJson.length;i++){
+            let item=document.createElement("option");
+            item.innerHTML=DataJson[i].cod;
+            selectCod.appendChild(item);
+        }
+        changeSelect(); 
     }
-    changeSelect();
+    else{
+        alert("Não há produtos no estoque.");
+    }
 }
 
 function changeSelect(){
@@ -102,9 +150,9 @@ function saveData(){
         });
         if(flag==false){
             localtdArray.forEach(function(item) {
-            localtd=document.createElement("td");
-            localtd.innerHTML=item;
-            localtr.appendChild(localtd);
+                localtd=document.createElement("td");
+                localtd.innerHTML=item;
+                localtr.appendChild(localtd);
         });
         
         localtd=document.createElement("td");
@@ -141,17 +189,6 @@ function Store()
         }
         localStorage.setItem("DataJson", JSON.stringify(DataJson));
     } 
-}
-
-function SaveasJson(DataJson){
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(new Blob([JSON.stringify(DataJson, null, 2)], {
-        type: "text/plain"
-      }));
-    a.setAttribute("download", "data.json");
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a); 
 }
 
 function editData(td){
@@ -208,6 +245,7 @@ function redirect(pos) {
             document.querySelector(".main").innerHTML='<object type="text/html" data="doc.html" style="width:100%" height="100%"></object>';
             break;
         case 3:
+            window.location.href="Index.html"
             break;
     }
 }
