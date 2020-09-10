@@ -129,11 +129,21 @@ function changeSelect(){
 }
 
 function getvalUsingFind(id) {
-
   let obj = DataJson.find(item => item.cod === id);
   return obj;
 }
-
+function checkIfItemExist(datavalue){
+    DataJson=JSON.parse(localStorage.getItem("DataJson"));
+    if(DataJson!=null){
+        if(DataJson.findIndex(item => item.cod == datavalue)>=0)
+           return true;
+        else
+            return false;
+    }
+    else{
+        return false;
+    }
+}
 function saveData(){
     if(row ==null){
         let flag=false;
@@ -141,7 +151,11 @@ function saveData(){
         let localtdArray=[];
         let localtr=document.createElement("tr");
         let localtd=null;
-
+        let exist=checkIfItemExist(getinputdataArray[0].value);
+        if(exist){
+            alert("Ja possui um item com este codigo, por favor digite ou altere o mesmo");
+            flag=true;
+        }
         getinputdataArray.forEach(function(item) {
             if(item.value.length==0){
                 flag=true;
@@ -161,7 +175,10 @@ function saveData(){
                             <a onclick="deleteData(this)">Delete</a>`;
         localtr.appendChild(localtd);
         document.querySelector("#datatable").appendChild(localtr);
-        }   
+        }
+        else{
+            alert("Preencha todos os campos");
+        }
     }
     else{
         let getinputdataArray=document.querySelectorAll("input");
