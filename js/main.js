@@ -56,21 +56,22 @@ function setToDoc(type){
 
 function submitSell()
 {
+    DataJson=JSON.parse(localStorage.getItem("DataJson"));
     if(document.querySelector("#idTForm").rows.length!=0){
         let tableRows=document.querySelector("#idTForm").rows;
         for(let i=1;i<tableRows.length;i++){
             let cod = tableRows[i].cells[0].innerHTML;
             let prod = getvalUsingFind(cod);
+            let index = DataJson.findIndex(x => x.cod === prod.cod);
             if((prod.countNow-tableRows[i].cells[2].innerHTML)<=0){
-                prod.countNow=0;
-                prod.countSell+=tableRows[i].cells[2].innerHTML;
+                DataJson.pop(DataJson[index]);
             }
             else{
                 prod.countNow-=tableRows[i].cells[2].innerHTML;
-                prod.countSell+=tableRows[i].cells[2].innerHTML;
+                prod.countSell=parseInt(prod.countSell)+parseInt(tableRows[i].cells[2].innerHTML);
+                DataJson[index]=prod;
             }
         }
-    DataJson=JSON.parse(localStorage.getItem("DataJson"));
     if(DataJson!=null){
         localStorage.removeItem("DataJson");
         localStorage.setItem("DataJson", JSON.stringify(DataJson));
@@ -107,7 +108,7 @@ function presetSell()
 {
     let selectCod=document.querySelector("#cod");
     DataJson=JSON.parse(localStorage.getItem("DataJson"));
-    if(DataJson!=null){
+    if(DataJson.length!=0){
            for(let i=0;i<DataJson.length;i++){
             let item=document.createElement("option");
             item.innerHTML=DataJson[i].cod;
@@ -203,6 +204,7 @@ function deleteData(td){
     row=td.parentElement.parentElement;
     document.querySelector("#datatable").deleteRow(row.rowIndex);
     resetForm();
+    Store();
 }
 
 function resetForm(){
