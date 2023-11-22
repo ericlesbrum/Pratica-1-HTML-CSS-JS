@@ -1,18 +1,7 @@
-setAlertNone();
 setInterval(setLocalTime);
 var row=null;
 var DataJson=[];
 var money=null;
-$(function(){
-    $("#checkIDPass").click(function(){
-        if(checkCredential()){
-            window.location.href='Dashboard.html';
-        }
-        else{
-            $("#alert").show();
-        }
-    });
-});
 
 function setTd(){
     let td=[];
@@ -233,26 +222,10 @@ function resetForm(){
     
     row=null;
 }
-function setAlertNone(){
-    if(document.querySelector("#alert")!=null)
-        document.querySelector("#alert").style.display="none";
-}
 
-function checkCredential(){
-	if(document.querySelector("#idUser") !=null && document.querySelector("#inputPassword")!=null)
-	{
-		let id=document.querySelector("#idUser").value;
-	    let psword=document.querySelector("#inputPassword").value;
-	    if(id != '' && psword != ''){
-	        return true;
-	    }
-	    else{
-	        return false;
-	    }
-	}
-}
 
-function redirect(pos) {
+
+function RedirectPage(pos) {
     switch(pos){
         case 0:
             document.querySelector(".main").innerHTML='<object type="text/html" data="storage.html" style="width:100%" height="100%"></object>';
@@ -264,7 +237,7 @@ function redirect(pos) {
             document.querySelector(".main").innerHTML='<object type="text/html" data="doc.html" style="width:100%" height="100%"></object>';
             break;
         case 3:
-            window.location.href="Index.html"
+            window.location.href="../Index.html"
             break;
     }
 }
