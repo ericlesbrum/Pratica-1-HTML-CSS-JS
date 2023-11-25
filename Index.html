@@ -1,49 +1,50 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/bootstrap-5.3.2-dist/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/Login/index.css" rel="stylesheet">
     <title>Empresa ZYX</title>
-    <meta charset="utf-8">
 </head>
 
-<body>
-    <main>
+<body class="d-flex align-items-center justify-content-center vh-100 flex-column">
+    <main class="text-center text-white-50 bg-dark p-4 rounded">
         <form>
             <div>
                 <img src="./img/genericlogo.jpg" alt="Logo da Empresa">
             </div>
             <div>
-                <div id="alert">
-                    <span>Usuário ou Senha Invalidos</span>
+                <div id="msgError" class="mb-3 mt-3 alert alert-warning visually-hidden">
+                    <strong>Usuário ou Senha Invalidos</strong>
                 </div>
-                <div>
-                    <div>
-                        <label for="idUser">Login</label>
-                        <input type="tel" id="idUser" placeholder="login.corp" required autofocus>
+                <div class="text-start">
+                    <div class="mb-3 mt-3">
+                        <label class="form-label" for="idUser">Login</label>
+                        <input class="form-control" type="tel" id="idUser" placeholder="exemplo.login" required
+                            autofocus>
                     </div>
-                    <div>
-                        <label for="inputPassword" >Senha</label>
-                        <input type="password" id="inputPassword" placeholder="*****" required>
+                    <div class="mb-3">
+                        <label class="form-label" for="inputPassword">Senha</label>
+                        <input class="form-control" type="password" id="inputPassword" placeholder="****************"
+                            required>
                     </div>
                 </div>
             </div>
-            <div>
-                <label>
-                    <input type="checkbox" value="lembrar">Lembrar Usuário
+            <div class="form-check mb-3">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="lembrar">Lembrar Usuário
                 </label>
             </div>
-            <button type="submit" id="checkIDPass">Entrar</button>
-            <p class="coppy">&copy; 2017-2023</p>
+            <button type="submit" id="checkIDPass" class="btn btn-primary w-100 ">Entrar</button>
         </form>
     </main>
-    <footer>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous">
-        </script>
-    </footer>
 </body>
+<footer class="fixed-bottom text-center text-bg-dark opacity-75">
+    <p class="coppy"></p>
+</footer>
+<script src="./js/bootstrap-5.3.2-dist/bootstrap.bundle.min.js"></script>
+<script type="module" src="./js/View/LoginView.js"></script>
 
 </html>
