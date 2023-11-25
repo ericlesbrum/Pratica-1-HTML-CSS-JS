@@ -1,18 +1,25 @@
 export class UserModel {
+    name = "Administrador";
+    job = "Administrador";
+    department = "Administrativo";
     constructor(login, pwd) {
         this.login = login;
         this.pwd = pwd;
     }
     AddSession() {
-        let existSession = localStorage.getItem("LOGIN");
-        if (existSession === null)
-            localStorage.setItem("LOGIN", `{"login":${this.login},"pwd":${this.pwd}}`);
-        else
+        localStorage.setItem("LOGIN", `
         {
-            //Logica caso haja uma sessão existente;
+            "name":"Administrador",
+            "job":"Administrador",
+            "department":"Administrativo"
         }
+        `);
     }
-    GetSession() {
+
+    static GetSession() {
         return localStorage.getItem("LOGIN");
+    }
+    static DestroySession() {
+        localStorage.removeItem("LOGIN");
     }
 }
