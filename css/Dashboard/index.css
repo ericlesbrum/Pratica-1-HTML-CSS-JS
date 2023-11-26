@@ -1,6 +1,6 @@
 .nav-button{
     border-radius: 6px;
-    transition: all 150ms ease-out;
+    transition: all 100ms ease-out;
 }
 .nav-button:hover{
     cursor: pointer;
