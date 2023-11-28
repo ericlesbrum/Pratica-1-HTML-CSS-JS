@@ -1,4 +1,5 @@
 import { DashboardController } from "../Controller/DashboardController.js";
+import { CheckTime } from "../utils/CheckTime.js"
 class DashboardView {
     constructor() {
         this.dashboardController = new DashboardController();
@@ -50,10 +51,6 @@ class DashboardView {
             this.dashboardController.Logout();
         })
     }
-}
-function CheckTime(i) {
-    if (i < 10) { i = "0" + i };
-    return i;
 }
 const dashboardVieW = new DashboardView();
 dashboardVieW.Init();

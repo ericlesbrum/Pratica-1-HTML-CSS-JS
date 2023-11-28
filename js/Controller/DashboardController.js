@@ -1,15 +1,18 @@
 import { UserModel } from "../Model/UserModel.js";
 export class DashboardController {
+    constructor() {
+        this.UserModel = new UserModel();
+    }
     GetUserInfo() {
-        return UserModel.GetSession();
+        return this.UserModel.GetSession();
     }
     ExistSession() {
-        let existSession = UserModel.GetSession();
+        let existSession = this.UserModel.GetSession();
         if (existSession === null)
             window.location.href = '../Index.html';
     }
     Logout() {
-        UserModel.DestroySession();
+        this.UserModel.DestroySession();
         window.location.href = '../Index.html';
     }
 }

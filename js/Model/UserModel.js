@@ -1,3 +1,4 @@
+import { DataBase } from "../database/DataBase.js";
 export class UserModel {
     name = "Administrador";
     job = "Administrador";
@@ -5,9 +6,10 @@ export class UserModel {
     constructor(login, pwd) {
         this.login = login;
         this.pwd = pwd;
+        this.DataBase = new DataBase();
     }
     AddSession() {
-        localStorage.setItem("LOGIN", `
+        this.DataBase.Add("LOGIN", `
         {
             "name":"Administrador",
             "job":"Administrador",
@@ -16,10 +18,10 @@ export class UserModel {
         `);
     }
 
-    static GetSession() {
-        return localStorage.getItem("LOGIN");
+    GetSession() {
+        return this.DataBase.Get("LOGIN")
     }
-    static DestroySession() {
-        localStorage.removeItem("LOGIN");
+    DestroySession() {
+        this.DataBase.Remove("LOGIN")
     }
 }
