@@ -1,0 +1,8 @@
+.page-link:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white !important;
+}
+.page-link{
+    transition: all 100ms ease-out;    
+}

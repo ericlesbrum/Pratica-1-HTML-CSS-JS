@@ -1,4 +1,4 @@
-import { DataBase } from '../database/DataBase.js'
+import { DataBase } from '../Database/DataBase.js'
 export class ProductModel {
     constructor(prodCod, prodName, costPrice, sellingPrice, amount, totalSelling) {
         this.prodCod = prodCod;
@@ -19,7 +19,9 @@ export class ProductModel {
         }
         return false;
     }
-    Get(value) {
+    Get(value=null) {
+        if(!value)
+            return JSON.parse(this.DataBase.Get("PRODUCTS"));
         const items = JSON.parse(this.DataBase.Get("PRODUCTS"));
         const result = items.filter((element) => element["prodCod"] === value);
         if (result !== null) {

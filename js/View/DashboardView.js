@@ -1,17 +1,44 @@
 import { DashboardController } from "../Controller/DashboardController.js";
 import { CheckTime } from "../utils/CheckTime.js"
+import { Menu } from "../components/Menu.js";
+import { AddItem } from "../components/AddItem.js";
+import { Home } from "../components/Home.js";
+
 class DashboardView {
     constructor() {
         this.dashboardController = new DashboardController();
         this.mainContent = document.querySelector("#main");
-        this.nav_buttons = document.querySelectorAll(".nav-button");
+        this.menu = document.querySelector("#menu");
     }
     Init() {
         this.dashboardController.ExistSession();
+        this.SetMenu();
+        this.mainContent.innerHTML = Home.body;
+        Home.ChangePageOnClick();
+        Home.SortProductsBy();
+    }
+    SetMenu() {
+        this.menu.innerHTML = Menu();
         this.SetUserInfo();
         this.ClockTimer();
         this.SetTimer();
         this.Logout();
+        this.SetAddItem();
+        this.SetHome();
+    }
+    SetHome() {
+        const addItem = document.querySelector("#home");
+        addItem.addEventListener("click", () => {
+            this.mainContent.innerHTML = Home.body;
+            Home.ChangePageOnClick();
+            Home.SortProductsBy();
+        });
+    }
+    SetAddItem() {
+        const addItem = document.querySelector("#addItem");
+        addItem.addEventListener("click", () => {
+            this.mainContent.innerHTML = AddItem();
+        });
     }
     SetTimer() {
         setInterval(this.ClockTimer, 1000);

@@ -1,8 +1,12 @@
-.nav-button{
+@import url('../Paginate/index.css');
+@import url('../Home/index.css');
+
+.nav-button {
     border-radius: 6px;
     transition: all 100ms ease-out;
 }
-.nav-button:hover{
+
+.nav-button:hover {
     cursor: pointer;
     background-color: #0d6efd
 }

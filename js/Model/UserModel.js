@@ -17,7 +17,6 @@ export class UserModel {
         }
         `);
     }
-
     GetSession() {
         return this.DataBase.Get("LOGIN")
     }
