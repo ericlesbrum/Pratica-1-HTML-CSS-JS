@@ -9,13 +9,13 @@ export class UserModel {
         this.DataBase = new DataBase();
     }
     AddSession() {
-        this.DataBase.Add("LOGIN", `
-        {
-            "name":"Administrador",
-            "job":"Administrador",
-            "department":"Administrativo"
-        }
-        `);
+        this.DataBase.Add("LOGIN",
+            {
+                name: "Administrador",
+                job: "Administrador",
+                department: "Administrativo"
+            }
+        );
     }
     GetSession() {
         return this.DataBase.Get("LOGIN")

@@ -27,8 +27,8 @@ class DashboardView {
         this.SetHome();
     }
     SetHome() {
-        const addItem = document.querySelector("#home");
-        addItem.addEventListener("click", () => {
+        const home = document.querySelector("#home");
+        home.addEventListener("click", () => {
             this.mainContent.innerHTML = Home.body;
             Home.ChangePageOnClick();
             Home.SortProductsBy();
@@ -37,7 +37,8 @@ class DashboardView {
     SetAddItem() {
         const addItem = document.querySelector("#addItem");
         addItem.addEventListener("click", () => {
-            this.mainContent.innerHTML = AddItem();
+            this.mainContent.innerHTML = AddItem.body;
+            AddItem.InsertProducts();
         });
     }
     SetTimer() {
