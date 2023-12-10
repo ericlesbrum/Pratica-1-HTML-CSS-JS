@@ -162,10 +162,12 @@ export class DataBase {
         }
     ];
     constructor() {
-        localStorage.setItem("PRODUCTS", JSON.stringify(this.dbProducts));
+        const isAlreadyExistProducts = this.Get("PRODUCTS");
+        if (isAlreadyExistProducts === undefined || isAlreadyExistProducts === null)
+            localStorage.setItem("PRODUCTS", JSON.stringify(this.dbProducts));
     }
     Add(key, object) {
-        localStorage.setItem(key, object);
+        localStorage.setItem(key, JSON.stringify(object));
     }
     Get(key) {
         return localStorage.getItem(key);
