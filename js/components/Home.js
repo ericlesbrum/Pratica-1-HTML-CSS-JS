@@ -66,9 +66,9 @@ export const Home = {
         });
     },
     SortArray(element) {
-        productsdb.sort((a, b) => {
+        products = Paginate(productsdb, pageLimit, pageCount);
+        products.sort((a, b) => {
             return a[element.id] < (b[element.id]) ? -1 : (a[element.id] > b[element.id]);
         })
-        products = Paginate(productsdb, pageLimit, pageCount);
     }
 }
