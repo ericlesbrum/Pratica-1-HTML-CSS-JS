@@ -1,4 +1,5 @@
 import { DataBase } from '../Database/DataBase.js'
+import { status } from '../utils/status.js';
 export class ProductModel {
     constructor(prodCod, prodName, costPrice, sellingPrice, amount = 0, totalSelling = 0) {
         this.prodCod = prodCod;
@@ -15,25 +16,28 @@ export class ProductModel {
         if (result.length === 0) {
             items.push(object.ConvertToJSONFormat());
             this.DataBase.Add("PRODUCTS", items);
+            return status("Produto inserido com sucesso!", false);
         }
+        return status("Já existe um produto registrado com esse código", false);
     }
     Get(value = null) {
         if (value === null || value === undefined)
             return JSON.parse(this.DataBase.Get("PRODUCTS"));
         const items = JSON.parse(this.DataBase.Get("PRODUCTS"));
-        const result = items.filter((element) => element["prodCod"] == value);
+        const result = items.filter((element) => element["prodCod"] === value);
         return result[0] === undefined ? result[0] : null;
     }
     Update() {
     }
     Remove(prodCod) {
-        const items = this.GetProducts();
+        const items = this.Get();
         const result = items.filter((element) => element["prodCod"] !== prodCod);
-        if (result !== null) {
-            this.DataBase.Add("PRODUCTS", JSON.stringify(items));
-            return true;
+        console.log(JSON.stringify(result));
+        if (result.length !== 0) {
+            this.DataBase.Add("PRODUCTS", result);
+            return status("Produto removido com sucesso!", true);
         }
-        return false;
+        return status("Produto não encontrado", false);
     }
     ConvertToJSONFormat() {
         return {

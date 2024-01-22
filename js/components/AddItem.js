@@ -1,4 +1,5 @@
 import { ProductController } from '../Controller/ProductController.js';
+import { ClearFields } from '../utils/ClearFields.js';
 export const AddItem = {
     body: `
     <div>
@@ -38,10 +39,10 @@ export const AddItem = {
         const submitProduct = document.querySelector('#submitProduct');
         const inputs = document.querySelectorAll('input');
         const productController = new ProductController();
-        ClearFields(inputs);
         submitProduct.addEventListener('click', (event) => {
             event.preventDefault();
             const obj = productController.AddProduct(Number(inputs[0].value), inputs[1].value, Number(inputs[2].value), Number(inputs[3].value), Number(inputs[4].value))
+            ClearFields(inputs);
             if (obj.status) {
                 console.log(obj.message);
             }
@@ -49,9 +50,4 @@ export const AddItem = {
                 console.log(obj.message)
         })
     },
-}
-function ClearFields(inputs) {
-    inputs.forEach(element => {
-        element.value = null;
-    });
 }

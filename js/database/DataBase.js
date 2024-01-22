@@ -172,7 +172,4 @@ export class DataBase {
     Get(key) {
         return localStorage.getItem(key);
     }
-    Remove(key) {
-        localStorage.removeItem(key);
-    }
 }
