@@ -9,6 +9,11 @@ export function TableBody(products) {
                 <td>${element['amount']}</td>
                 <td>${element['sellingPrice']}</td>
                 <td>${element['totalSelling']}</td>
+                <td>
+                    <img src="/img/icons/edit.svg" alt="Editar"/>
+                    <img src="/img/icons/dollar-sign.svg" alt="Editar"/>
+                    <img src="/img/icons/trash-2.svg" alt="Excluir"/>
+                </td>
             </tr>
             `;}
     )

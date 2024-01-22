@@ -11,6 +11,13 @@ export const Home = {
     body: `
         <div>
             <div>
+                <h1>Estoque</h1>
+            </div>
+            <div>
+                <div>
+                    <input/>
+                    <img src="/img/icons/search.svg" alt="Excluir"/>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -20,6 +27,7 @@ export const Home = {
                             <th class='tableHeader' id='amount'>Preço de custo</th>
                             <th class='tableHeader' id='sellingPrice'>Preço de venda</th>
                             <th class='tableHeader' id='totalSelling'>Total Vendido</th>
+                            <th class='tableHeader' id='operation'>Operações</th>
                         </tr>
                     </thead>
                     <tbody id="bodyTable">
@@ -29,7 +37,13 @@ export const Home = {
             </div>
             <div class='text-end'>
                 <ul class="pagination pagination-ms">
-                ${PaginateButtons(pageLimit, productsdb.length)}
+                    <li class="page-item" id="previous">
+                        <a class="page-link text-black">Anterior</a>
+                    </li>
+                    ${PaginateButtons(pageLimit, productsdb.length)}
+                    <li class="page-item" id="next">
+                        <a class="page-link text-black">Proximo</a>
+                    </li>
                 </ul>
             </div>
         </div>
