@@ -22,5 +22,6 @@ export class UserModel {
     }
     DestroySession() {
         this.DataBase.Remove("LOGIN")
+        this.DataBase.Remove("PRODUCTS")
     }
 }

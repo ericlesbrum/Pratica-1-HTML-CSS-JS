@@ -1,0 +1,9 @@
+.nav-button {
+    border-radius: 6px;
+    transition: all 100ms ease-out;
+}
+
+.nav-button:hover {
+    cursor: pointer;
+    background-color: #0d6efd
+}

@@ -1,6 +1,7 @@
 import { ProductController } from '../Controller/ProductController.js';
 import { TableBody } from '../utils/TableBody.js';
 import { Paginate, PaginateButtons } from '../utils/Paginate.js'
+import { SetRemoveItem } from './RemoveItem.js';
 const productController = new ProductController();
 const productsdb = productController.GetProducts();
 const pageLimit = 10;
@@ -11,7 +12,7 @@ export const Home = {
     body: `
         <div>
             <div>
-                <h1>Estoque</h1>
+                <h3>Estoque</h3>
             </div>
             <div>
                 <div>
@@ -84,5 +85,13 @@ export const Home = {
             return a[element.id] < (b[element.id]) ? -1 : (a[element.id] > b[element.id]);
         })
         products = Paginate(productsdb, pageLimit, pageCount);
+    },
+    SetRemoveProduct() {
+        const removeProductsButton = document.querySelectorAll(".delete");
+        removeProductsButton.forEach(element => {
+            element.addEventListener('click', () => {
+                SetRemoveItem(element.getAttribute('value'));
+            })
+        });
     }
 }

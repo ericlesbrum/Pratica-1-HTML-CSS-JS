@@ -32,7 +32,6 @@ export class ProductModel {
     Remove(prodCod) {
         const items = this.Get();
         const result = items.filter((element) => element["prodCod"] !== prodCod);
-        console.log(JSON.stringify(result));
         if (result.length !== 0) {
             this.DataBase.Add("PRODUCTS", result);
             return status("Produto removido com sucesso!", true);

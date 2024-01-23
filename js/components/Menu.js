@@ -17,21 +17,6 @@ export function Menu() {
                 Inserir produto no estoque
             </span>
         </li>
-        <li id="removeItem" class="nav-item nav-button">
-            <span class="nav-link text-white">
-                Excluir produto do estoque
-            </span>
-        </li>
-        <li id="sellingItem" class="nav-item nav-button">
-            <span class="nav-link text-white">
-                Realizar venda
-            </span>
-        </li>
-        <li id="searchItem" class="nav-item nav-button">
-            <span class="nav-link text-white">
-                Procurar um produto
-            </span>
-        </li>
         <li id="report" class="nav-item nav-button">
             <span class="nav-link text-white">
                 Emitir relatorio gerencial

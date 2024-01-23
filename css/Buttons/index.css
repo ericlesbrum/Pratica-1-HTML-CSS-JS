@@ -1,0 +1,20 @@
+.delete,
+.edit,
+.sell {
+    transition: all 100ms ease-out;
+}
+
+.edit:hover {
+    cursor: pointer;
+    background-color:blue;
+}
+
+.sell:hover {
+    cursor: pointer;
+    background-color: green;
+}
+
+.delete:hover {
+    cursor: pointer;
+    background-color: red;
+}

@@ -3,7 +3,6 @@ import { CheckTime } from "../utils/CheckTime.js"
 import { Menu } from "../components/Menu.js";
 import { AddItem } from "../components/AddItem.js";
 import { Home } from "../components/Home.js";
-import { RemoveItem } from "../components/RemoveItem.js";
 
 class DashboardView {
     constructor() {
@@ -17,6 +16,7 @@ class DashboardView {
         this.mainContent.innerHTML = Home.body;
         Home.ChangePageOnClick();
         Home.SortProductsBy();
+        Home.SetRemoveProduct();
     }
     SetMenu() {
         this.menu.innerHTML = Menu();
@@ -26,7 +26,6 @@ class DashboardView {
         this.Logout();
         this.SetAddItem();
         this.SetHome();
-        this.SetRemoveItem();
     }
     SetHome() {
         const home = document.querySelector("#home");
@@ -41,13 +40,6 @@ class DashboardView {
         addItem.addEventListener("click", () => {
             this.mainContent.innerHTML = AddItem.body;
             AddItem.InsertProducts();
-        });
-    }
-    SetRemoveItem() {
-        const removeItem = document.querySelector("#removeItem");
-        removeItem.addEventListener("click", () => {
-            this.mainContent.innerHTML = RemoveItem.body;
-            RemoveItem.SetRemoveItem();
         });
     }
     SetTimer() {
