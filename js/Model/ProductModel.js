@@ -46,7 +46,6 @@ export class ProductModel {
             sellingPrice: this.sellingPrice,
             amount: this.amount,
             totalSelling: this.totalSelling,
-
         };
     }
 }

@@ -51,7 +51,7 @@ export const Home = {
             ${Modal}
         </div>
         `,
-    ChangePageOnClick: () => {
+    ChangePageOnClick: (Action = null) => {
         const pageLinks = document.querySelectorAll('.page-item');
         const bodyTable = document.querySelector('#bodyTable');
         pageLinks.forEach(element => {
@@ -60,6 +60,7 @@ export const Home = {
                 pageCount = parseInt(element.childNodes[1].innerHTML);
                 products = Paginate(productsdb, pageLimit, pageCount);
                 bodyTable.innerHTML = TableBody(products);
+                Action();
             })
         })
     },
@@ -94,7 +95,7 @@ export const Home = {
             element.addEventListener('click', () => {
                 ChangeModalText('Você deseja remover este item?',
                     `O item que será removido é: ${element.getAttribute('prodName')}, deseja efetuar esta ação?`,
-                    [SetRemoveItem], element.getAttribute('prodCod'));
+                    SetRemoveItem, element.getAttribute('prodCod'));
             })
         });
     }

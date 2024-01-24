@@ -12,11 +12,8 @@ class DashboardView {
     }
     Init() {
         this.dashboardController.ExistSession();
-        this.SetMenu();
         this.mainContent.innerHTML = Home.body;
-        Home.ChangePageOnClick();
-        Home.SortProductsBy();
-        Home.SetRemoveProduct();
+        this.SetMenu();
     }
     SetMenu() {
         this.menu.innerHTML = Menu();
@@ -34,6 +31,8 @@ class DashboardView {
             Home.ChangePageOnClick();
             Home.SortProductsBy();
         });
+        Home.ChangePageOnClick(Home.SetRemoveProduct);
+        Home.SortProductsBy();
     }
     SetAddItem() {
         const addItem = document.querySelector("#addItem");
@@ -66,7 +65,7 @@ class DashboardView {
         seconds = CheckTime(seconds);
         let getCurrentDate = `
         <div>
-            <span>${today.getDate()}/${today.getMonth()}/${today.getFullYear()}</span>
+            <span>${today.getDate()}/${CheckTime(today.getMonth()+1)}/${today.getFullYear()}</span>
         </div>
         <div>
             <span>${hours + ":" + minutes + ":" + seconds}</span>

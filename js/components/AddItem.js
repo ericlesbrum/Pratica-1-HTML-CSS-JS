@@ -39,9 +39,10 @@ export const AddItem = {
         const submitProduct = document.querySelector('#submitProduct');
         const inputs = document.querySelectorAll('input');
         const productController = new ProductController();
-        submitProduct.addEventListener('click', (event) => {
-            event.preventDefault();
-            const obj = productController.AddProduct(Number(inputs[0].value), inputs[1].value, Number(inputs[2].value), Number(inputs[3].value), Number(inputs[4].value))
+        submitProduct.addEventListener('click', () => {
+            const obj = productController.AddProduct(Number(inputs[0].value), 
+            inputs[1].value, Number(inputs[2].value), Number(inputs[3].value), 
+            Number(inputs[4].value))
             ClearFields(inputs);
             if (obj.status) {
                 console.log(obj.message);

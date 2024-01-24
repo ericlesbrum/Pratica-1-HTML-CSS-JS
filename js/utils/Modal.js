@@ -37,7 +37,7 @@ export function ChangeModalText(title, body, Action = null, value = null) {
         `
         let buttonAction = document.querySelector('#confirm');
         buttonAction.addEventListener('click', () => {
-            Action[0](value);
+            Action(value);
             location.reload();
         })
     }
