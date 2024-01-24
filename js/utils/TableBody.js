@@ -1,4 +1,3 @@
-import { SetRemoveItem } from '../components/RemoveItem.js';
 export function TableBody(products) {
     let tbody = '';
     products.forEach(element => {
@@ -17,7 +16,7 @@ export function TableBody(products) {
                     <div class="sell">
                         <img src="/img/icons/dollar-sign.svg" alt="Editar" />
                     </div>
-                    <div class="delete" value='${element['prodCod']}'>
+                    <div class="delete" prodCod='${element['prodCod']}' prodName='${element['prodName']}' data-bs-toggle="modal" data-bs-target="#myModal">
                         <img src="/img/icons/trash-2.svg" alt="Excluir"  />
                     </div>
                 </td>

@@ -2,6 +2,7 @@ import { ProductController } from '../Controller/ProductController.js';
 import { TableBody } from '../utils/TableBody.js';
 import { Paginate, PaginateButtons } from '../utils/Paginate.js'
 import { SetRemoveItem } from './RemoveItem.js';
+import { Modal, ChangeModalText } from '../utils/Modal.js';
 const productController = new ProductController();
 const productsdb = productController.GetProducts();
 const pageLimit = 10;
@@ -12,7 +13,7 @@ export const Home = {
     body: `
         <div>
             <div>
-                <h3>Estoque</h3>
+                <h4>Estoque</h4>
             </div>
             <div>
                 <div>
@@ -43,10 +44,11 @@ export const Home = {
                     </li>
                     ${PaginateButtons(pageLimit, productsdb.length)}
                     <li class="page-item" id="next">
-                        <a class="page-link text-black">Proximo</a>
+                        <a class="page-link text-black">Próximo</a>
                     </li>
                 </ul>
             </div>
+            ${Modal}
         </div>
         `,
     ChangePageOnClick: () => {
@@ -90,7 +92,9 @@ export const Home = {
         const removeProductsButton = document.querySelectorAll(".delete");
         removeProductsButton.forEach(element => {
             element.addEventListener('click', () => {
-                SetRemoveItem(element.getAttribute('value'));
+                ChangeModalText('Você deseja remover este item?',
+                    `O item que será removido é: ${element.getAttribute('prodName')}, deseja efetuar esta ação?`,
+                    [SetRemoveItem], element.getAttribute('prodCod'));
             })
         });
     }
