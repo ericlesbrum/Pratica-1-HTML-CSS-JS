@@ -28,11 +28,15 @@ class DashboardView {
         const home = document.querySelector("#home");
         home.addEventListener("click", () => {
             this.mainContent.innerHTML = Home.body;
-            Home.ChangePageOnClick();
+            Home.ChangePageOnClick([Home.SetRemoveProduct, Home.EditProduct, Home.SortProductsBy]);
+            Home.SetRemoveProduct();
             Home.SortProductsBy();
+            Home.EditProduct();
         });
-        Home.ChangePageOnClick(Home.SetRemoveProduct);
+        Home.ChangePageOnClick([Home.SetRemoveProduct, Home.SortProductsBy, Home.EditProduct]);
+        Home.SetRemoveProduct();
         Home.SortProductsBy();
+        Home.EditProduct();
     }
     SetAddItem() {
         const addItem = document.querySelector("#addItem");
@@ -65,7 +69,7 @@ class DashboardView {
         seconds = CheckTime(seconds);
         let getCurrentDate = `
         <div>
-            <span>${today.getDate()}/${CheckTime(today.getMonth()+1)}/${today.getFullYear()}</span>
+            <span>${today.getDate()}/${CheckTime(today.getMonth() + 1)}/${today.getFullYear()}</span>
         </div>
         <div>
             <span>${hours + ":" + minutes + ":" + seconds}</span>

@@ -3,6 +3,7 @@ import { TableBody } from '../utils/TableBody.js';
 import { Paginate, PaginateButtons } from '../utils/Paginate.js'
 import { SetRemoveItem } from './RemoveItem.js';
 import { Modal, ChangeModalText } from '../utils/Modal.js';
+import { EditItem } from './EditItem.js';
 const productController = new ProductController();
 const productsdb = productController.GetProducts();
 const pageLimit = 10;
@@ -60,7 +61,9 @@ export const Home = {
                 pageCount = parseInt(element.childNodes[1].innerHTML);
                 products = Paginate(productsdb, pageLimit, pageCount);
                 bodyTable.innerHTML = TableBody(products);
-                Action();
+                Action.forEach(element => {
+                    element();
+                });
             })
         })
     },
@@ -93,9 +96,23 @@ export const Home = {
         const removeProductsButton = document.querySelectorAll(".delete");
         removeProductsButton.forEach(element => {
             element.addEventListener('click', () => {
+                const fields = element.getAttribute('element').split(',');
                 ChangeModalText('Você deseja remover este item?',
-                    `O item que será removido é: ${element.getAttribute('prodName')}, deseja efetuar esta ação?`,
-                    SetRemoveItem, element.getAttribute('prodCod'));
+                    `O item que será removido é: ${fields[1]}, deseja efetuar esta ação?`,
+                    SetRemoveItem, fields[0]);
+            })
+        });
+    },
+    EditProduct() {
+        const editProductsButton = document.querySelectorAll(".edit");
+        const home = document.querySelector("#main");
+        editProductsButton.forEach(element => {
+            element.addEventListener('click', () => {
+                home.innerHTML = EditItem.body
+                const inputs = document.querySelectorAll("input");
+                const arr=element.getAttribute('element').split(',');
+                delete arr[5];
+                console.log(arr);
             })
         });
     }
